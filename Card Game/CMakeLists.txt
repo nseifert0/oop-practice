@@ -1,2 +1,2 @@
 project (war)
-add_executable(war war.cpp)
+add_executable(war war.cpp card.cpp)
