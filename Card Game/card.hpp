@@ -1,10 +1,41 @@
-#ifndef CARD_HPP
-#define CARD_HPP
+//This code is a copy of a sample from Andrew Sutton
+// Source code located here: https://gitlab.com/andrew.n.sutton/spring-18-oop/blob/master/war/card.hpp
 
-class card {
-	public: 
-	int suit;
-	int rank;
+#pragma once
+
+enum Rank {
+  Ace,
+  Two,
+  Three,
+  Four,
+  Five,
+  Six,
+  Seven,
+  Eight,
+  Nine,
+  Ten,
+  Jack,
+  Queen,
+  King,
 };
 
-#endif
+// Represents the suits of a card.
+enum Suit {
+  Hearts,
+  Diamonds,
+  Clubs, 
+  Spades,
+};
+
+class Card {
+
+  Card(Rank r, Suit s)
+    : rank(r), suit(s)
+  {
+
+  }
+
+private:
+  Rank rank;
+  Suit suit;
+};
