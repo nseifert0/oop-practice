@@ -27,12 +27,10 @@ enum Suit {
   Spades,
 };
 
-class Card {
-
+struct Card {
   Card(Rank r, Suit s)
     : rank(r), suit(s)
   {
-
   }
 
 private:
