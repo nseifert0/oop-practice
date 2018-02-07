@@ -24,6 +24,11 @@ class string {
 			: s(str.s), length(str.length)
 		{
 		}
+		
+		bool operator==(const string& s1, const string& s2);
+		bool operator>(const string& s1, const string& s2);
+		
+		
 	private:
 		int length;
 		char* s;
