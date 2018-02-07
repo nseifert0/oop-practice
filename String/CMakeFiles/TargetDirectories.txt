@@ -1,0 +1,3 @@
+/mnt/c/Users/Mike/Documents/Object Oriented Programming/oop-practice/String/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Mike/Documents/Object Oriented Programming/oop-practice/String/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/Mike/Documents/Object Oriented Programming/oop-practice/String/CMakeFiles/string.dir

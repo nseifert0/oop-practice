@@ -1,0 +1,24 @@
+
+Card Game/Makefile
+Card Game/war
+*.o
+*.make
+*.cmake
+Card Game/CMakeFiles/3.5.2/CMakeDetermineCompilerABI_C.bin
+Card Game/CMakeCache.txt
+Card Game/CMakeFiles/3.5.2/CMakeDetermineCompilerABI_CXX.bin
+Card Game/CMakeFiles/3.5.2/CompilerIdC/a.out
+Card Game/CMakeFiles/3.5.2/CompilerIdC/CMakeCCompilerId.c
+Card Game/CMakeFiles/3.5.2/CompilerIdCXX/a.out
+Card Game/CMakeFiles/3.5.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+Card Game/CMakeFiles/war.dir/link.txt
+Card Game/CMakeFiles/war.dir/CXX.includecache
+Card Game/CMakeFiles/progress.marks
+Card Game/CMakeFiles/feature_tests.cxx
+Card Game/CMakeFiles/Makefile2
+Card Game/CMakeFiles/feature_tests.c
+Card Game/CMakeFiles/CMakeOutput.log
+Card Game/CMakeFiles/cmake.check_cache
+Card Game/CMakeFiles/feature_tests.bin
+Card Game/CMakeFiles/TargetDirectories.txt
+Card Game/CMakeFiles/war.dir/depend.internal
