@@ -28,6 +28,10 @@ class string {
 		bool operator==(const string& str);
 		bool operator<(const string& str);
 		
+		~string()
+		{
+			delete[] s;
+		}
 		
 	private:
 		int length;
