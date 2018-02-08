@@ -25,8 +25,8 @@ class string {
 		{
 		}
 		
-		bool operator==(const string& s1, const string& s2);
-		bool operator>(const string& s1, const string& s2);
+		bool operator==(const string& str);
+		bool operator<(const string& str);
 		
 		
 	private:
