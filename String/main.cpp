@@ -1,4 +1,5 @@
 #include "string.hpp"
+#include <iostream>
 
 int main() {
 	// Default construct
@@ -10,7 +11,12 @@ int main() {
 
 	// Copy construct and assign
 	string s2 = s1;
-	s2 = s1; // s2 == s1
+	s2 = s1; 
+	if(s2 == s1)
+	{
+		std::cout << "Good\n";
+	}
+	
 
 	// Move construction and assignment (optional)
 //	string s3 = std::move(s2);
@@ -18,6 +24,10 @@ int main() {
 
 	// Compare
 	s1 == s1;
+	if(s1 == s1)
+	{
+		std::cout << "Good\n";
+	}
 
 	// Order
 	s1 < s1; // lexicographical comparison
