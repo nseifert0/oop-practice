@@ -21,8 +21,12 @@ class string {
 		}
 		
 		string(const string& str)
-			: s(str.s), length(str.length)
+			: length(str.length), s(new char[length])
 		{
+			for(int i = 0; i < this->length; i++)
+			{
+				this->s[i] = str.s[i];
+			}
 		}
 		
 		bool operator==(const string& str);
