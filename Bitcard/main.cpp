@@ -3,6 +3,9 @@
 #include "bitcard.hpp"
 
 int main() {
-	std::cout << "Hello World\n";
+	Bitcard bc(Ace, Spades);
+	Rank r = bc.getRank();
+	Suit s = bc.getSuit();
+	std::cout << r << " of " << s << "\n";
 	return 0;
 }
