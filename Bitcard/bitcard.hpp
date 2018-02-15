@@ -31,21 +31,13 @@ public:
     : bits((unsigned)s << 4 | (unsigned)r)
   { }
 
-  Rank get_rank() const {
-    return (Rank)(0b001111 & bits);
-  }
+  Rank getRank() const;
 
-  Suit get_suit() const {
-    return (Suit)((0b110000 & bits) >> 4);
-  }
+  Suit getSuit() const;
 
-  bool operator==(Bitcard c) const {
-    return bits == c.bits;
-  }
+  bool operator==(Bitcard bc) const;
 
-  bool operator!=(Bitcard c) const {
-    return bits != c.bits;
-  }
+  bool operator!=(Bitcard bc) const;
 
 private:
   unsigned char bits;
