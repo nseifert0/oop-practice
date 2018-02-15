@@ -13,11 +13,13 @@ class string {
 	public:
 		string()
 		{
+
 		}
 		
 		string(const char* s)
 			: length(std::strlen(s)), s(new char[length])
 		{	
+			length = 3;
 		}
 		
 		string(const string& str)
