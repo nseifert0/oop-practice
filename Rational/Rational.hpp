@@ -17,6 +17,26 @@ class Rational {
 	{
 		return r1.num == r2.num;
 	}
+	
+	friend bool operator<(Rational r1, Rational r2)
+	{
+		return r1.num == r2.num;
+	}
+	
+	friend bool operator<=(Rational r1, Rational r2)
+	{
+		return r1.num == r2.num;
+	}
+	
+	friend bool operator>(Rational r1, Rational r2)
+	{
+		return r1.num == r2.num;
+	}
+	
+	friend bool operator>=(Rational r1, Rational r2)
+	{
+		return r1.num == r2.num;
+	}
 };
 
 #endif 
