@@ -4,7 +4,7 @@
 class Rational {
 	public:
 		Rational(int n, int d)
-			:num(), den(d)
+			:num(n), den(d)
 		{
 			
 		};
@@ -12,6 +12,11 @@ class Rational {
 	private:
 		int num;
 		int den;
+		
+	friend bool operator==(Rational r1, Rational r2)
+	{
+		return r1.num == r2.num;
+	}
 };
 
 #endif 
