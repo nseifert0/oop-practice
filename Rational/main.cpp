@@ -2,6 +2,6 @@
 #include "Rational.hpp"
  
 int main(int argc, char *argv[]){
-	std::cout << "Hello World\n";
+	Rational r(5, 6);
 	return 0;
 }
