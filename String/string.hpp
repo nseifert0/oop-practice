@@ -19,16 +19,13 @@ class string {
 		string(const char* s)
 			: length(std::strlen(s)), s(new char[length])
 		{	
-			length = 3;
+
 		}
 		
 		string(const string& str)
 			: length(str.length), s(new char[length])
 		{
-			for(int i = 0; i < this->length; i++)
-			{
-				this->s[i] = str.s[i];
-			}
+			std:strcpy(s, str);
 		}
 		
 		bool operator==(const string& str);
