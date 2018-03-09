@@ -20,22 +20,22 @@ class Rational {
 	
 	friend bool operator<(Rational r1, Rational r2)
 	{
-		return r1.num == r2.num;
+		return (r1.num*r2.den) < (r2.num*r1.den);
 	}
 	
 	friend bool operator<=(Rational r1, Rational r2)
 	{
-		return r1.num == r2.num;
+		return (r1.num*r2.den) <= (r2.num*r1.den);
 	}
 	
 	friend bool operator>(Rational r1, Rational r2)
 	{
-		return r1.num == r2.num;
+		return (r1.num*r2.den) > (r2.num*r1.den);
 	}
 	
 	friend bool operator>=(Rational r1, Rational r2)
 	{
-		return r1.num == r2.num;
+		return (r1.num*r2.den) >= (r2.num*r1.den);
 	}
 };
 
