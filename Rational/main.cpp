@@ -3,8 +3,8 @@
 #include "Rational.hpp"
  
 int main(int argc, char *argv[]){
-	Rational r1(5, 6);
-	Rational r2(6, 10);
+	Rational r1(1, 2);
+	Rational r2(2, 4);
 	assert(r1 == r2);
 	
 	return 0;
