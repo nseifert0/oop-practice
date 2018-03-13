@@ -40,6 +40,10 @@ class Player {
 		std::string name;
 		Title title;
 		Gender gender;
+		int treasury;
+		int grainReserve;
+		int land;
+		int serfs;
 };
 
 #endif
