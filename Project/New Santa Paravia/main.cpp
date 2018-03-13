@@ -3,6 +3,6 @@
 
 int main() {
 		std::cout << "Hello World\n";
-		Player p("Test Name", Sir);
+		Player p("Test Name", Male);
 		return 0;
 }
