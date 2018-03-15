@@ -45,6 +45,7 @@ class Player {
 		std::string name;
 		Title title;
 		Gender gender;
+		int yearOfDeath;
 		bool isBankrupt;
 		bool isDead;
 		bool hasWon;
