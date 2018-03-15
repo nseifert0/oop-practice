@@ -160,158 +160,155 @@ int main(void) {
 	/* We're finished. */
 	return(0);
 }
+
 /******************************************************************************
  ** This function will take a parameter Hi and return a random integer**
  ** between 0 and Hi.**
  ******************************************************************************/
-int Random(int Hi)
-{
-float RanNum;
-RanNum = (float)rand();
-RanNum /= (float)RAND_MAX;
-RanNum *= (float)Hi;
-return((int)RanNum);
+int Random(int Hi) {
+	float RanNum;
+	RanNum = (float)rand();
+	RanNum /= (float)RAND_MAX;
+	RanNum *= (float)Hi;
+	return((int)RanNum);
 }
-void InitializePlayer(player *Me, int year, int city, int level, char *name,
-     boolean MorF)
+
+void InitializePlayer(player *Me, int year, int city, int level, char *name, boolean MorF)
 {
-/* This is pretty straightforward. */
-Me->Cathedral = 0;
-strcpy(Me->City, CityList[city]);
-Me->Clergy = 5;
-Me->CustomsDuty = 25;
-Me->Difficulty = level;
-Me->GrainPrice = 25;
-Me->GrainReserve = 5000;
-Me->IncomeTax = 5;
-Me->IsBankrupt = False;
-Me->IsDead = False;
-Me->IWon = False;
-Me->Justice = 2;
-Me->Land = 10000;
-Me->LandPrice = 10.0;
-Me->MaleOrFemale = MorF;
-Me->Marketplaces = 0;
-Me->Merchants = 25;
-Me->Mills = 0;
-strcpy(Me->Name, name);
-Me->Nobles = 4;
-Me->OldTitle = 1;
-Me->Palace = 0;
-Me->PublicWorks = 1.0;
-Me->SalesTax = 10;
-Me->Serfs = 2000;
-Me->Soldiers = 25;
-Me->TitleNum = 1;
-if(Me->MaleOrFemale == True)
-strcpy(Me->Title, MaleTitles[0]);
-else
-strcpy(Me->Title, FemaleTitles[0]);
-if(city == 6) strcpy(Me->Title, "Baron");
-Me->Treasury = 1000;
-Me->WhichPlayer = city;
-Me->Year = year;
-Me->YearOfDeath = year + 20 + Random(35);
-return;
+	/* This is pretty straightforward. */
+	Me->Cathedral = 0;
+	strcpy(Me->City, CityList[city]);
+	Me->Clergy = 5;
+	Me->CustomsDuty = 25;
+	Me->Difficulty = level;
+	Me->GrainPrice = 25;
+	Me->GrainReserve = 5000;
+	Me->IncomeTax = 5;
+	Me->IsBankrupt = False;
+	Me->IsDead = False;
+	Me->IWon = False;
+	Me->Justice = 2;
+	Me->Land = 10000;
+	Me->LandPrice = 10.0;
+	Me->MaleOrFemale = MorF;
+	Me->Marketplaces = 0;
+	Me->Merchants = 25;
+	Me->Mills = 0;
+	strcpy(Me->Name, name);
+	Me->Nobles = 4;
+	Me->OldTitle = 1;
+	Me->Palace = 0;
+	Me->PublicWorks = 1.0;
+	Me->SalesTax = 10;
+	Me->Serfs = 2000;
+	Me->Soldiers = 25;
+	Me->TitleNum = 1;
+	if(Me->MaleOrFemale == True) {
+		strcpy(Me->Title, MaleTitles[0]);
+	}
+	else {
+		strcpy(Me->Title, FemaleTitles[0]);
+	}
+	if(city == 6) {
+		strcpy(Me->Title, "Baron");
+	}
+	Me->Treasury = 1000;
+	Me->WhichPlayer = city;
+	Me->Year = year;
+	Me->YearOfDeath = year + 20 + Random(35);
+	return;
 }
-void AddRevenue(player *Me)
-{
-Me->Treasury += (Me->JusticeRevenue + Me->CustomsDutyRevenue);
-Me->Treasury += (Me->IncomeTaxRevenue + Me->SalesTaxRevenue);
-/* Penalize deficit spending. */
-if(Me->Treasury < 0)
-Me->Treasury = (int)((float)Me->Treasury * 1.5);
-/* Will a title make the creditors happy (for now)? */
-if(Me->Treasury < (-10000 * Me->TitleNum))
-Me->IsBankrupt = True;
-return;
+
+void AddRevenue(player *Me) {
+	Me->Treasury += (Me->JusticeRevenue + Me->CustomsDutyRevenue);
+	Me->Treasury += (Me->IncomeTaxRevenue + Me->SalesTaxRevenue);
+	/* Penalize deficit spending. */
+	if(Me->Treasury < 0)
+	Me->Treasury = (int)((float)Me->Treasury * 1.5);
+	/* Will a title make the creditors happy (for now)? */
+	if(Me->Treasury < (-10000 * Me->TitleNum))
+	Me->IsBankrupt = True;
+	return;
 }
-int AttackNeighbor(player *Me, player *Him)
-{
-int LandTaken;
-int deadsoldiers = 0;
-if(Me->WhichPlayer == 7)
-    LandTaken = Random(9000) + 1000;
-else
-    LandTaken = (Me->Soldiers * 1000) - (Me->Land / 3);
-if(LandTaken > (Him->Land - 5000))
-    LandTaken = (Him->Land - 5000) / 2;
-Me->Land += LandTaken;
-Him->Land -= LandTaken;
-printf("\a\n%s %s of %s invades and seizes %d hectares of land!\n",
-        Me->Title, Me->Name, Me->City, LandTaken);
-deadsoldiers = Random(40);
-if(deadsoldiers > (Him->Soldiers - 15))
-    deadsoldiers = Him->Soldiers - 15;
-Him->Soldiers -= deadsoldiers;
-printf("%s %s loses %d soldiers in battle.\n", Him->Title, Him->Name,
-        deadsoldiers);
-return(LandTaken);
+int AttackNeighbor(player *Me, player *Him) {
+	int LandTaken;
+	int deadsoldiers = 0;
+	if(Me->WhichPlayer == 7) {
+		LandTaken = Random(9000) + 1000;
+	}
+	else {
+		LandTaken = (Me->Soldiers * 1000) - (Me->Land / 3);
+	}
+	if(LandTaken > (Him->Land - 5000)) {
+		LandTaken = (Him->Land - 5000) / 2;
+	}
+	Me->Land += LandTaken;
+	Him->Land -= LandTaken;
+	printf("\a\n%s %s of %s invades and seizes %d hectares of land!\n", Me->Title, Me->Name, Me->City, LandTaken);
+	deadsoldiers = Random(40);
+	if(deadsoldiers > (Him->Soldiers - 15)) {
+		deadsoldiers = Him->Soldiers - 15;
+	}
+	Him->Soldiers -= deadsoldiers;
+	printf("%s %s loses %d soldiers in battle.\n", Him->Title, Him->Name, deadsoldiers);
+	return(LandTaken);
 }
-void BuyCathedral(player *Me)
-{
-Me->Cathedral += 1;
-Me->Clergy += Random(6);
-Me->Treasury -= 5000;
-Me->PublicWorks += 1.0;
-return;
+void BuyCathedral(player *Me) {
+	Me->Cathedral += 1;
+	Me->Clergy += Random(6);
+	Me->Treasury -= 5000;
+	Me->PublicWorks += 1.0;
+	return;
 }
-void BuyGrain(player *Me)
-{
-char string[256];
-int HowMuch;
-printf("How much grain do you want to buy (0 to specify a total)? ");
-fgets(string, 255, stdin);
-HowMuch = (int)atoi(string);
-if(HowMuch == 0)
-{
-    printf("How much total grain do you wish? ");
-    fgets(string, 255, stdin);
-    HowMuch = (int)atoi(string);
-    HowMuch -= Me->GrainReserve;
-    if(HowMuch < 0)
-    {
-        printf("Invalid total amount.\n\n");
-        return;
-    }
+void BuyGrain(player *Me) {
+	char string[256];
+	int HowMuch;
+	printf("How much grain do you want to buy (0 to specify a total)? ");
+	fgets(string, 255, stdin);
+	HowMuch = (int)atoi(string);
+	if(HowMuch == 0) {
+		printf("How much total grain do you wish? ");
+		fgets(string, 255, stdin);
+		HowMuch = (int)atoi(string);
+		HowMuch -= Me->GrainReserve;
+		if(HowMuch < 0) {
+			printf("Invalid total amount.\n\n");
+			return;
+		}
+	}
+	Me->Treasury -= (HowMuch * Me->GrainPrice / 1000);
+	Me->GrainReserve += HowMuch;
+	return;
 }
-Me->Treasury -= (HowMuch * Me->GrainPrice / 1000);
-Me->GrainReserve += HowMuch;
-return;
+void BuyLand(player *Me) {
+	char string[256];
+	int HowMuch;
+	printf("How much land do you want to buy? ");
+	fgets(string, 255, stdin);
+	HowMuch = (int)atoi(string);
+	Me->Land += HowMuch;
+	Me->Treasury -= (int)(((float)HowMuch * Me->LandPrice));
+	return;
 }
-void BuyLand(player *Me)
-{
-char string[256];
-int HowMuch;
-printf("How much land do you want to buy? ");
-fgets(string, 255, stdin);
-HowMuch = (int)atoi(string);
-Me->Land += HowMuch;
-Me->Treasury -= (int)(((float)HowMuch * Me->LandPrice));
-return;
+void BuyMarket(player *Me) {
+	Me->Marketplaces += 1;
+	Me->Merchants += 5;
+	Me->Treasury -= 1000;
+	Me->PublicWorks += 1.0;
+	return;
 }
-void BuyMarket(player *Me)
-{
-Me->Marketplaces += 1;
-Me->Merchants += 5;
-Me->Treasury -= 1000;
-Me->PublicWorks += 1.0;
-return;
+void BuyMill(player *Me) {
+	Me->Mills += 1;
+	Me->Treasury -= 2000;
+	Me->PublicWorks += 0.25;
+	return;
 }
-void BuyMill(player *Me)
-{
-Me->Mills += 1;
-Me->Treasury -= 2000;
-Me->PublicWorks += 0.25;
-return;
-}
-void BuyPalace(player *Me)
-{
-Me->Palace += 1;
-Me->Nobles += Random(2);
-Me->Treasury -= 3000;
-Me->PublicWorks += 0.5;
-return;
+void BuyPalace(player *Me) {
+	Me->Palace += 1;
+	Me->Nobles += Random(2);
+	Me->Treasury -= 3000;
+	Me->PublicWorks += 0.5;
+	return;
 }
 void BuySoldiers(player *Me) {
 	Me->Soldiers += 20;
@@ -324,46 +321,41 @@ int limit10(int num, int denom) {
 	val = num / denom;
 	return(val > 10 ? 10 : val);
 }
-boolean CheckNewTitle(player *Me)
-{
-int Total;
-/* Tally up our success so far . . . . */
-Total = limit10(Me->Marketplaces, 1);
-Total += limit10(Me->Palace, 1);
-Total += limit10(Me->Cathedral, 1);
-Total += limit10(Me->Mills, 1);
-Total += limit10(Me->Treasury, 5000);
-Total += limit10(Me->Land, 6000);
-Total += limit10(Me->Merchants, 50);
-Total += limit10(Me->Nobles, 5);
-Total += limit10(Me->Soldiers, 50);
-Total += limit10(Me->Clergy, 10);
-Total += limit10(Me->Serfs, 2000);
-Total += limit10((int)(Me->PublicWorks * 100.0), 500);
-Me->TitleNum = (Total / Me->Difficulty) - Me->Justice;
-if(Me->TitleNum > 7)
-Me->TitleNum = 7;
-if(Me->TitleNum < 0)
-Me->TitleNum = 0;
-/* Did we change (could be backwards or forwards)? */
-if(Me->TitleNum > Me->OldTitle)
-{
-Me->OldTitle = Me->TitleNum;
-ChangeTitle(Me);
-    printf("\aGood news! %s has achieved the rank of %s\n\n", Me->Name,
-            Me->Title);
-return(True);
+boolean CheckNewTitle(player *Me) {
+	int Total;
+	/* Tally up our success so far . . . . */
+	Total = limit10(Me->Marketplaces, 1);
+	Total += limit10(Me->Palace, 1);
+	Total += limit10(Me->Cathedral, 1);
+	Total += limit10(Me->Mills, 1);
+	Total += limit10(Me->Treasury, 5000);
+	Total += limit10(Me->Land, 6000);
+	Total += limit10(Me->Merchants, 50);
+	Total += limit10(Me->Nobles, 5);
+	Total += limit10(Me->Soldiers, 50);
+	Total += limit10(Me->Clergy, 10);
+	Total += limit10(Me->Serfs, 2000);
+	Total += limit10((int)(Me->PublicWorks * 100.0), 500);
+	Me->TitleNum = (Total / Me->Difficulty) - Me->Justice;
+	if(Me->TitleNum > 7)
+	Me->TitleNum = 7;
+	if(Me->TitleNum < 0)
+	Me->TitleNum = 0;
+	/* Did we change (could be backwards or forwards)? */
+	if(Me->TitleNum > Me->OldTitle) {
+		Me->OldTitle = Me->TitleNum;
+		ChangeTitle(Me);
+		printf("\aGood news! %s has achieved the rank of %s\n\n", Me->Name, Me->Title);
+		return(True);
+	}
+	Me->TitleNum = Me->OldTitle;
+	return(False);
 }
-Me->TitleNum = Me->OldTitle;
-return(False);
-}
-void GenerateHarvest(player *Me)
-{
-Me->Harvest = (Random(5) + Random(6)) / 2;
-Me->Rats = Random(50);
-Me->GrainReserve = ((Me->GrainReserve * 100) -
-        (Me->GrainReserve * Me->Rats)) / 100;
-return;
+void GenerateHarvest(player *Me) {
+	Me->Harvest = (Random(5) + Random(6)) / 2;
+	Me->Rats = Random(50);
+	Me->GrainReserve = ((Me->GrainReserve * 100) - (Me->GrainReserve * Me->Rats)) / 100;
+	return;
 }
 void GenerateIncome(player *Me)
 {
@@ -473,139 +465,140 @@ case 5: printf("Excellent Weather. Great Harvest! "); break;
 }
 return;
 }
-int ReleaseGrain(player *Me)
-{
-double xp, zp;
-float x, z;
-char string[256];
-int HowMuch, Maximum, Minimum;
-boolean IsOK;
-IsOK = False;
-Minimum = Me->GrainReserve / 5;
-Maximum = (Me->GrainReserve - Minimum);
-while(IsOK == False)
-{
-printf("How much grain will you release for consumption?\n");
-printf("1 = Minimum (%d), 2 = Maximum(%d), or enter a value: ",
-            Minimum, Maximum);
-fgets(string, 255, stdin);
-HowMuch = (int)atoi(string);
-if(HowMuch == 1)
-        HowMuch = Minimum;
-    if(HowMuch == 2)
-        HowMuch = Maximum;
-/* Are we being a Scrooge? */
-    if(HowMuch < Minimum)
-printf("You must release at least 20%% of your reserves.\n");
-/* Whoa. Slow down there son. */
-    else if(HowMuch > Maximum)
-printf("You must keep at least 20%%.\n");
-    else
-    IsOK = True;
+int ReleaseGrain(player *Me) {
+	double xp, zp;
+	float x, z;
+	char string[256];
+	int HowMuch, Maximum, Minimum;
+	boolean IsOK;
+	IsOK = False;
+	Minimum = Me->GrainReserve / 5;
+	Maximum = (Me->GrainReserve - Minimum);
+	while(IsOK == False) {
+		printf("How much grain will you release for consumption?\n");
+		printf("1 = Minimum (%d), 2 = Maximum(%d), or enter a value: ", Minimum, Maximum);
+		fgets(string, 255, stdin);
+		HowMuch = (int)atoi(string);
+		if(HowMuch == 1) {
+			HowMuch = Minimum;
+		}
+		if(HowMuch == 2) {
+			HowMuch = Maximum;
+		}
+		/* Are we being a Scrooge? */
+		if(HowMuch < Minimum) {
+			printf("You must release at least 20%% of your reserves.\n");
+		}
+		/* Whoa. Slow down there son. */
+		else if(HowMuch > Maximum) {
+			printf("You must keep at least 20%%.\n");
+		}
+		else {
+			IsOK = True;
+		}
+	}
+	Me->SoldierPay = Me->MarketRevenue = Me->NewSerfs = Me->DeadSerfs = 0;
+	Me->TransplantedSerfs = Me->FleeingSerfs = 0;
+	Me->InvadeMe = False;
+	Me->GrainReserve -= HowMuch;
+	z = (float)HowMuch / (float)Me->GrainDemand - 1.0;
+	if(z > 0.0) {
+		z /= 2.0;
+	}
+	if(z > 0.25) {
+		z = z / 10.0 + 0.25;
+	}
+	zp = 50.0 - (double)Me->CustomsDuty - (double)Me->SalesTax - (double)Me->IncomeTax;
+	if(zp < 0.0) {
+		zp *= (double)Me->Justice;
+	}
+	zp /= 10.0;
+	if(zp > 0.0) {
+		zp += (3.0 - (double)Me->Justice);
+	}
+	z += ((float)zp / 10.0);
+	if(z > 0.5) {
+		z = 0.5;
+	}
+	if(HowMuch < (Me->GrainDemand - 1))
+	{
+	x = ((float)Me->GrainDemand - (float)HowMuch) /
+		(float)Me->GrainDemand * 100.0 - 9.0;
+	xp = (double)x;
+	if(x > 65.0)
+	x = 65.0;
+	if(x < 0.0)
+	{
+	xp = 0.0;
+	x = 0.0;
+	}
+	SerfsProcreating(Me, 3.0);
+	SerfsDecomposing(Me, xp + 8.0);
+	}
+	else
+	{
+	SerfsProcreating(Me, 7.0);
+	SerfsDecomposing(Me, 3.0);
+	if((Me->CustomsDuty + Me->SalesTax) < 35)
+	Me->Merchants += Random(4);
+	if(Me->IncomeTax < Random(28))
+	{
+	Me->Nobles += Random(2);
+	Me->Clergy += Random(3);
+	}
+	if(HowMuch > (int)((float)Me->GrainDemand * 1.3))
+	{
+	zp = (double)Me->Serfs / 1000.0;
+	z = ((float)HowMuch - (float)(Me->GrainDemand)) /
+	(float)Me->GrainDemand * 10.0;
+	z *= ((float)zp * (float)Random(25));
+	z += (float)Random(40);
+		Me->TransplantedSerfs = (int)z;
+		Me->Serfs += Me->TransplantedSerfs;
+		printf("%d serfs move to the city\n", Me->TransplantedSerfs);
+	zp = (double)z;
+	z = ((float)zp * (float)rand()) / (float)RAND_MAX;
+	if(z > 50.0)
+	z = 50.0;
+	Me->Merchants += (int)z;
+	Me->Nobles++;
+	Me->Clergy += 2;
+	}
+	}
+	if(Me->Justice > 2) {
+		Me->JusticeRevenue = Me->Serfs / 100 * (Me->Justice - 2) * (Me->Justice - 2);
+		Me->JusticeRevenue = Random(Me->JusticeRevenue);
+		Me->Serfs -= Me->JusticeRevenue;
+		Me->FleeingSerfs = Me->JusticeRevenue;
+		printf("%d serfs flee harsh justice\n", Me->FleeingSerfs);
+	}
+	Me->MarketRevenue = Me->Marketplaces * 75;
+	if(Me->MarketRevenue > 0) {
+		Me->Treasury += Me->MarketRevenue;
+		printf("Your market earned %d florins.\n", Me->MarketRevenue);
+	}
+	Me->MillRevenue = Me->Mills * (55 + Random(250));
+	if(Me->MillRevenue > 0) {
+		Me->Treasury += Me->MillRevenue;
+		printf("Your woolen mill earned %d florins.\n", Me->MillRevenue);
+	}
+	Me->SoldierPay = Me->Soldiers * 3;
+	Me->Treasury -= Me->SoldierPay;
+	printf("You paid your soldiers %d florins.\n", Me->SoldierPay);
+	printf("You have %d serfs in your city.\n", Me->Serfs);
+	printf("(Press ENTER): ");
+	fgets(string, 255, stdin);
+	if((Me->Land / 1000) > Me->Soldiers) {
+		Me->InvadeMe = True;
+		return(3);
+	}
+	if((Me->Land / 500) > Me->Soldiers) {
+		Me->InvadeMe = True;
+		return(3);
+	}
+	return(0);
 }
-Me->SoldierPay = Me->MarketRevenue = Me->NewSerfs = Me->DeadSerfs = 0;
-Me->TransplantedSerfs = Me->FleeingSerfs = 0;
-Me->InvadeMe = False;
-Me->GrainReserve -= HowMuch;
-z = (float)HowMuch / (float)Me->GrainDemand - 1.0;
-if(z > 0.0)
-z /= 2.0;
-if(z > 0.25)
-z = z / 10.0 + 0.25;
-zp = 50.0 - (double)Me->CustomsDuty - (double)Me->SalesTax -
-    (double)Me->IncomeTax;
-if(zp < 0.0)
-zp *= (double)Me->Justice;
-zp /= 10.0;
-if(zp > 0.0)
-zp += (3.0 - (double)Me->Justice);
-z += ((float)zp / 10.0);
-if(z > 0.5)
-z = 0.5;
-if(HowMuch < (Me->GrainDemand - 1))
-{
-x = ((float)Me->GrainDemand - (float)HowMuch) /
-    (float)Me->GrainDemand * 100.0 - 9.0;
-xp = (double)x;
-if(x > 65.0)
-x = 65.0;
-if(x < 0.0)
-{
-xp = 0.0;
-x = 0.0;
-}
-SerfsProcreating(Me, 3.0);
-SerfsDecomposing(Me, xp + 8.0);
-}
-else
-{
-SerfsProcreating(Me, 7.0);
-SerfsDecomposing(Me, 3.0);
-if((Me->CustomsDuty + Me->SalesTax) < 35)
-Me->Merchants += Random(4);
-if(Me->IncomeTax < Random(28))
-{
-Me->Nobles += Random(2);
-Me->Clergy += Random(3);
-}
-if(HowMuch > (int)((float)Me->GrainDemand * 1.3))
-{
-zp = (double)Me->Serfs / 1000.0;
-z = ((float)HowMuch - (float)(Me->GrainDemand)) /
-(float)Me->GrainDemand * 10.0;
-z *= ((float)zp * (float)Random(25));
-z += (float)Random(40);
-    Me->TransplantedSerfs = (int)z;
-    Me->Serfs += Me->TransplantedSerfs;
-    printf("%d serfs move to the city\n", Me->TransplantedSerfs);
-zp = (double)z;
-z = ((float)zp * (float)rand()) / (float)RAND_MAX;
-if(z > 50.0)
-z = 50.0;
-Me->Merchants += (int)z;
-Me->Nobles++;
-Me->Clergy += 2;
-}
-}
-if(Me->Justice > 2)
-{
-Me->JusticeRevenue = Me->Serfs / 100 * (Me->Justice - 2) *
-     (Me->Justice - 2);
-Me->JusticeRevenue = Random(Me->JusticeRevenue);
-Me->Serfs -= Me->JusticeRevenue;
-Me->FleeingSerfs = Me->JusticeRevenue;
-    printf("%d serfs flee harsh justice\n", Me->FleeingSerfs);
-}
-Me->MarketRevenue = Me->Marketplaces * 75;
-if(Me->MarketRevenue > 0)
-{
-Me->Treasury += Me->MarketRevenue;
-    printf("Your market earned %d florins.\n", Me->MarketRevenue);
-}
-Me->MillRevenue = Me->Mills * (55 + Random(250));
-if(Me->MillRevenue > 0)
-{
-Me->Treasury += Me->MillRevenue;
-    printf("Your woolen mill earned %d florins.\n", Me->MillRevenue);
-}
-Me->SoldierPay = Me->Soldiers * 3;
-Me->Treasury -= Me->SoldierPay;
-printf("You paid your soldiers %d florins.\n", Me->SoldierPay);
-printf("You have %d serfs in your city.\n", Me->Serfs);
-printf("(Press ENTER): ");
-fgets(string, 255, stdin);
-if((Me->Land / 1000) > Me->Soldiers)
-{
-Me->InvadeMe = True;
-return(3);
-}
-if((Me->Land / 500) > Me->Soldiers)
-{
-Me->InvadeMe = True;
-return(3);
-}
-return(0);
-}
+
 void SeizeAssets(player *Me)
 {
 char string[256];
