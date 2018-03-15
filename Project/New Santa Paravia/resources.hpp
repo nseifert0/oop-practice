@@ -26,8 +26,6 @@ class Resources {
 		int customsDutyRevenue;
 		int deadSerfs;
 		int treasury = 1000;
-		int grainReserve = 5000;
-		int land;
 		int serfs;
 };
 
