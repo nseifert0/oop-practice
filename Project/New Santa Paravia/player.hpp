@@ -1,6 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 #include <string>
+#include "resources.hpp"
 
 enum Title {
 	Sir,
@@ -35,15 +36,19 @@ class Player {
 			else
 				title = Lady;
 		}
-		
+	
+	Gender getGender() {
+		return gender;
+	}
+	
 	private:
 		std::string name;
 		Title title;
 		Gender gender;
-		int treasury;
-		int grainReserve;
-		int land;
-		int serfs;
+		bool isBankrupt;
+		bool isDead;
+		bool hasWon;
+		Resources resources;
 };
 
 #endif
