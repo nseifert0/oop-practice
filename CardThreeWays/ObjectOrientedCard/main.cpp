@@ -1,11 +1,8 @@
 #include <iostream>
 
-#include "bitcard.hpp"
+#include "oopcard.hpp"
 
 int main() {
-	Bitcard bc(Ace, Spades);
-	Rank r = bc.getRank();
-	Suit s = bc.getSuit();
-	std::cout << r << " of " << s << "\n";
+	JokerCard c(1, Black);
 	return 0;
 }
