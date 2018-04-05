@@ -1,5 +1,5 @@
-#ifndef BITCARD_HPP
-#define BITCARD_HPP
+#ifndef DUCARD_HPP
+#define DUCARD_HPP
 
 enum Rank {
   Ace,
@@ -24,23 +24,14 @@ enum Suit {
   Spades,
 };
 
-class Bitcard {
+class Card {
 public:
 
-  Bitcard(Rank r, Suit s)
-    : bits((unsigned)s << 4 | (unsigned)r)
+  Card(Rank r, Suit s)
   { }
 
-  Rank getRank() const;
-
-  Suit getSuit() const;
-
-  bool operator==(Bitcard bc) const;
-
-  bool operator!=(Bitcard bc) const;
-
 private:
-  unsigned char bits;
+
 };
 
 

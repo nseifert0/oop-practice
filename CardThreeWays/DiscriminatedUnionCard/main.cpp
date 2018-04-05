@@ -1,11 +1,8 @@
 #include <iostream>
 
-#include "bitcard.hpp"
+#include "ducard.hpp"
 
 int main() {
-	Bitcard bc(Ace, Spades);
-	Rank r = bc.getRank();
-	Suit s = bc.getSuit();
-	std::cout << r << " of " << s << "\n";
+	Card c(Ace, Spades);
 	return 0;
 }
