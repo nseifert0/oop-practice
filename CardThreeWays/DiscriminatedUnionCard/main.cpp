@@ -3,6 +3,7 @@
 #include "ducard.hpp"
 
 int main() {
-	Card c(Ace, Spades);
+	StandardCard s(Ace, Spades);
+	Card c(s);
 	return 0;
 }
