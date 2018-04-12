@@ -56,9 +56,12 @@ struct Array : Value , std::vector<Value*>{
 		this->push_back(v);
 	}
 	void print() const override {
+		std::cout << "[";
 		for (std::vector<Value*>::const_iterator it=this->begin(); it!=this->end(); ++it) {
 			(*it)->print();
+			std::cout << ", ";
 		}
+		std::cout << "]";
 	}
 };
 
@@ -68,11 +71,15 @@ struct Object : Value {
 		values.insert ( std::pair<String*,Value*>(k,v) );
 	}
 	void print() const override {
+		std::cout << "{\n";
 		for (std::map<String*, Value*>::const_iterator it=values.begin(); it!=values.end(); ++it) {
+			std::cout << "\t";
 			it->first->print();
-			std::cout << " : ";
+			std::cout << ": ";
 			it->second->print();
+			std::cout << ",\n";
 		}
+		std::cout << "}\n";
 	}
 };
 
