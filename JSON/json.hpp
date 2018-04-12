@@ -23,7 +23,7 @@ struct Value {
 
 struct Null : Value {
 	void print() const override {
-		std::cout << "\n";
+		std::cout << "";
 	}
 };
 
@@ -31,7 +31,7 @@ struct Bool : Value {
 	Bool(bool b) : val(b) { }
 	bool val;
 	void print() const override {
-		std::cout << val << "\n";
+		std::cout << val;
 	}
 };
 
@@ -39,7 +39,7 @@ struct Number : Value {
 	Number(double d) : val(d) { }
 	double val;
 	void print() const override {
-		std::cout << val << "\n";
+		std::cout << val;
 	}
 };
 
@@ -47,7 +47,7 @@ struct String : Value {
 	String(std::string s) : val(s) { }
 	std::string val;
 	void print() const override {
-		std::cout << val << "\n";
+		std::cout << val;
 	}
 };
 
@@ -60,11 +60,16 @@ struct Array : Value , std::vector<Value*>{
 };
 
 struct Object : Value {
-	std::map<std::string, Value*> values;
-	void add(std::string k, Value* v) {
-		values.insert ( std::pair<std::string,Value*>(k,v) );
+	std::map<String*, Value*> values;
+	void add(String* k, Value* v) {
+		values.insert ( std::pair<String*,Value*>(k,v) );
 	}
 	void print() const override {
+		for (std::map<String*, Value*>::const_iterator it=values.begin(); it!=values.end(); ++it) {
+			it->first->print();
+			std::cout << " : ";
+			it->second->print();
+		}
 	}
 };
 
