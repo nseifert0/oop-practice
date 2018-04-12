@@ -23,7 +23,7 @@ struct Value {
 
 struct Null : Value {
 	void print() const override {
-		std::cout << "";
+		std::cout << "{}";
 	}
 };
 
