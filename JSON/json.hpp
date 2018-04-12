@@ -9,7 +9,7 @@
 #include <vector>
 
 
-class Value {
+struct Value {
 	public:
 		Value()
 		{
@@ -21,43 +21,52 @@ class Value {
 
 };
 
-class Null : Value {
+struct Null : Value {
 	void print() const override {
 		std::cout << "\n";
 	}
 };
 
-class Bool : Value {
+struct Bool : Value {
+	Bool(bool b) : val(b) { }
 	bool val;
 	void print() const override {
 		std::cout << val << "\n";
 	}
 };
 
-class Number : Value {
+struct Number : Value {
+	Number(double d) : val(d) { }
 	double val;
 	void print() const override {
 		std::cout << val << "\n";
 	}
 };
 
-class String : Value {
-	string val;
+struct String : Value {
+	String(std::string s) : val(s) { }
+	std::string val;
 	void print() const override {
 		std::cout << val << "\n";
 	}
 };
 
-class Array : Value , vector<value *>{
+struct Array : Value , std::vector<Value*>{
+	void add(Value* v) {
+		this->push_back(v);
+	}
 	void print() const override {
-		std::cout << val << "\n";
 	}
 };
 
-class Object : Value {
-	std::unordered_map<string, Value*> values;
+struct Object : Value {
+	std::map<std::string, Value*> values;
+	void add(std::string k, Value* v) {
+		values.insert ( std::pair<std::string,Value*>(k,v) );
+	}
 	void print() const override {
-		std::cout << val << "\n";
 	}
 };
+
+Value* parse(const std::string&);
 #endif
