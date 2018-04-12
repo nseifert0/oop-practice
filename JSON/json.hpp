@@ -56,6 +56,9 @@ struct Array : Value , std::vector<Value*>{
 		this->push_back(v);
 	}
 	void print() const override {
+		for (std::vector<Value*>::const_iterator it=this->begin(); it!=this->end(); ++it) {
+			(*it)->print();
+		}
 	}
 };
 
