@@ -3,7 +3,11 @@
 #ifndef JSON_HPP
 #define JSON_HPP
 
-#include <cstring>
+#include <iostream>
+#include <iomanip>
+#include <map>
+#include <vector>
+
 
 class json {
 	public:
