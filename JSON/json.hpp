@@ -9,9 +9,9 @@
 #include <vector>
 
 
-class json {
+class Value {
 	public:
-		json()
+		Value()
 		{
 
 		}
@@ -20,27 +20,27 @@ class json {
 
 };
 
-class nullValue : json {
+class Null : Value {
 	
 };
 
-class boolValue : json {
+class Bool : Value {
 	bool val;
 };
 
-class numValue : json {
+class Number : Value {
 	double val;
 };
 
-class stringValue : json {
+class String : Value {
 	string val;
 };
 
-class arrayValue : json , vector<json *>{
+class Array : Value , vector<value *>{
 	
 };
 
-class objectValue : json {
+class Object : Value {
 	std::unordered_map<string, string> values;
 };
 #endif
