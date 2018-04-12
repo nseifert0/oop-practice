@@ -15,10 +15,32 @@ class json {
 		{
 
 		}
-		
+		virtual ~json() = default;
 	private:
-		int length;
-		char* s;
+
 };
 
+class nullValue : json {
+	
+};
+
+class boolValue : json {
+	bool val;
+};
+
+class numValue : json {
+	double val;
+};
+
+class stringValue : json {
+	string val;
+};
+
+class arrayValue : json , vector<json *>{
+	
+};
+
+class objectValue : json {
+	std::unordered_map<string, string> values;
+};
 #endif
