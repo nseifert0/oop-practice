@@ -16,7 +16,7 @@ class Value {
 
 		}
 		virtual void print() const = 0;
-		virtual ~json() = default;
+		virtual ~Value() = default;
 	private:
 
 };
@@ -55,6 +55,9 @@ class Array : Value , vector<value *>{
 };
 
 class Object : Value {
-	std::unordered_map<string, string> values;
+	std::unordered_map<string, Value*> values;
+	void print() const override {
+		std::cout << val << "\n";
+	}
 };
 #endif
