@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <random>
 
 #include "city.hpp"
 
@@ -19,17 +18,14 @@ enum Gender {
 
 class Player {
 	public:
-		Player(std::string n, Gender g, std::string cityName) :name(n), gender(g), city(cityName) {
+		Player(std::string n, Gender g, std::string cityName, int randomSeed) :name(n), gender(g), city(cityName) {
 			if(gender == Male) {
 				title = maleTitles[0];
 			}
 			else {
 				title = femaleTitles[0];
 			}
-			std::random_device device;
-			std::mt19937 generator(device());
-			std::uniform_int_distribution<int> distribution(0,35);
-			yearOfDeath = 20 + distribution(generator);
+			yearOfDeath = city.year + 20 + randomSeed;
 		}
 	
 		void changeTitle(int i) {
@@ -39,6 +35,11 @@ class Player {
 			else {
 				title = femaleTitles[i];
 			}
+			return;
+		}
+		
+		void takeTurn(int harvestSeed1, int harvestSeed2, int ratsSeed) {
+			city.generateHarvest(harvestSeed1, harvestSeed2, ratsSeed);
 			return;
 		}
 		
@@ -81,12 +82,14 @@ class Player {
 			return won;
 		}
 		
+		
 	private:
 		std::string name;
 		City city;
 		std::string title;
 		Gender gender;
 		int yearOfDeath;
+		bool invadeMe = false;
 		bool bankrupt = false;
 		bool dead = false;
 		bool won = false;

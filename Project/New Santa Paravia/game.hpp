@@ -1,9 +1,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include <limits>
+#include <random>
+
 #include "player.hpp"
 
 class Game {
@@ -75,11 +78,11 @@ class Game {
 				switch(gender[0]) {
 					case('M'):
 					case('m'):
-						players.push_back(Player(playerName, Male, cityNames[i]));
+						players.push_back(Player(playerName, Male, cityNames[i], randomInt(35)));
 						break;
 					case('F'):
 					case('f'):
-						players.push_back(Player(playerName, Female, cityNames[i]));
+						players.push_back(Player(playerName, Female, cityNames[i], randomInt(35)));
 						break;
 				}
 			}
@@ -118,10 +121,55 @@ class Game {
 			return;
 		}
 		
+		void turn(Player player) {
+			player.takeTurn(randomInt(5), randomInt(6), randomInt(50));
+			//player.checkInvasion();
+			//player.adjustTax();
+			//player.statePurchases();
+			player.checkTitle(difficultyLevel);
+			//player.advanceYear();
+			
+			return;
+			/*
+			GenerateHarvest(Me);
+			NewLandAndGrainPrices(Me);
+			BuySellGrain(Me);
+			ReleaseGrain(Me);
+			if(Me->InvadeMe == True)
+			{
+				for(i = 0; i < HowMany; i++)
+					if(i != Me->WhichPlayer)
+						if(MyPlayers[i].Soldiers > (Me->Soldiers * 2.4))
+						{
+							AttackNeighbor(&MyPlayers[i], Me);
+							i = 9;
+						}
+				if(i != 9)
+					AttackNeighbor(Baron, Me);
+			}
+			AdjustTax(Me);
+			DrawMap(Me);
+			StatePurchases(Me, HowMany, MyPlayers);
+			CheckNewTitle(Me);
+			
+			Me->Year++;
+			if(Me->Year == Me->YearOfDeath)
+				ImDead(Me);
+			if(Me->TitleNum >= 7)
+				Me->IWon = True;
+			*/
+		}
+		
+		int randomInt(int i) {
+			std::random_device device;
+			std::mt19937 generator(device());
+			std::uniform_int_distribution<int> distribution(0, i);
+		}
+		
 	private:
 		const std::vector<std::string> cityNames = {"Santa Paravia", "Fiumaccio", "Torricella", "Molinetto", "Fontanile", "Romanga", "Peppone"};
 		int difficultyLevel;
-		Player Baron = Player("Baron", Male, cityNames[6]);
+		Player Baron = Player("Baron", Male, cityNames[6], randomInt(35));
 		std::vector<Player> players;
 		bool isOver;
 		
