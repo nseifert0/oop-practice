@@ -1,8 +1,7 @@
-#include <iostream>
-#include "player.hpp"
+#include "game.hpp"
 
 int main() {
-		std::cout << "Hello World\n";
-		Player p("Test Name", Male);
+		Game g;
+		g.start();
 		return 0;
 }

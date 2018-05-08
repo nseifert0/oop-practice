@@ -1,15 +1,15 @@
-#ifndef RESOURCES_HPP
-#define RESOURCES_HPP
+#ifndef CITY_HPP
+#define CITY_HPP
+#include <string>
 
-class Resources {
+class City {
 	public:
-		Resources()
-		{
+		City(std::string name) :cityName(name) {
 			
 		}
-		
-	private:
-		int cathedral = 0;
+	
+
+		int cathedrals = 0;
 		int clergy = 5;
 		int customsDuty = 25;
 		int grainPrice = 25;
@@ -22,12 +22,15 @@ class Resources {
 		int merchants = 25;
 		int mills = 0;
 		int nobles = 4;
-		int palace = 0;
+		int palaces = 0;
 		double publicWorks = 1.0;		
 		int salesTax = 10;
 		int serfs = 2000;
 		int soldiers = 25;
 		int treasury = 1000;
+		
+	private:
+		std::string cityName;
 };
 
 #endif
