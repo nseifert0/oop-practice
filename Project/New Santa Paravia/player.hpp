@@ -43,6 +43,7 @@ class Player {
 			city.generateHarvest();
 			city.setNewLandAndGrainPrices();
 			buyAndSell();
+			city.releaseGrain();
 			return;
 		}
 		
