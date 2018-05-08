@@ -123,6 +123,60 @@ santa-paravia/fast:
 	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/build
 .PHONY : santa-paravia/fast
 
+city.o: city.cpp.o
+
+.PHONY : city.o
+
+# target to build an object file
+city.cpp.o:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/city.cpp.o
+.PHONY : city.cpp.o
+
+city.i: city.cpp.i
+
+.PHONY : city.i
+
+# target to preprocess a source file
+city.cpp.i:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/city.cpp.i
+.PHONY : city.cpp.i
+
+city.s: city.cpp.s
+
+.PHONY : city.s
+
+# target to generate assembly for a file
+city.cpp.s:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/city.cpp.s
+.PHONY : city.cpp.s
+
+game.o: game.cpp.o
+
+.PHONY : game.o
+
+# target to build an object file
+game.cpp.o:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/game.cpp.o
+.PHONY : game.cpp.o
+
+game.i: game.cpp.i
+
+.PHONY : game.i
+
+# target to preprocess a source file
+game.cpp.i:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/game.cpp.i
+.PHONY : game.cpp.i
+
+game.s: game.cpp.s
+
+.PHONY : game.s
+
+# target to generate assembly for a file
+game.cpp.s:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/game.cpp.s
+.PHONY : game.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -150,6 +204,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+player.o: player.cpp.o
+
+.PHONY : player.o
+
+# target to build an object file
+player.cpp.o:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/player.cpp.o
+.PHONY : player.cpp.o
+
+player.i: player.cpp.i
+
+.PHONY : player.i
+
+# target to preprocess a source file
+player.cpp.i:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/player.cpp.i
+.PHONY : player.cpp.i
+
+player.s: player.cpp.s
+
+.PHONY : player.s
+
+# target to generate assembly for a file
+player.cpp.s:
+	$(MAKE) -f CMakeFiles/santa-paravia.dir/build.make CMakeFiles/santa-paravia.dir/player.cpp.s
+.PHONY : player.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +240,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... santa-paravia"
+	@echo "... city.o"
+	@echo "... city.i"
+	@echo "... city.s"
+	@echo "... game.o"
+	@echo "... game.i"
+	@echo "... game.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... player.o"
+	@echo "... player.i"
+	@echo "... player.s"
 .PHONY : help
 
 
