@@ -76,6 +76,14 @@ int main(void) {
 	/* Initialize the random number generator seed. */
 	srand(time(NULL));
 	/* Start the game. */
+	
+	
+	float x, y, MyRandom;
+	int h;
+	/* Generate an offset for use in later int->float conversions. */
+	MyRandom = (float)((float)rand() / (float)RAND_MAX);
+	printf("%f", MyRandom);
+	
 	printf("Santa Paravia and Fiumaccio\n");
 	printf("\nDo you wish instructions (Y or N)? ");
 	fgets(string, 254, stdin);

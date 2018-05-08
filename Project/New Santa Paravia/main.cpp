@@ -1,6 +1,7 @@
 #include "game.hpp"
+#include <iostream>
 
-int main() {
+int main() {	
 		Game g;
 		g.start();
 		return 0;

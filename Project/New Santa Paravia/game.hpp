@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include <limits>
-#include <random>
 
 #include "player.hpp"
 
@@ -37,7 +36,7 @@ class Game {
 		}
 		
 		void setDifficulty() {
-			std::cout << "What will be the difficulty of this game?\n";
+			std::cout << "\nWhat will be the difficulty of this game?\n";
 			std::cout << "1. Apprentice\n";
 			std::cout << "2. Journeyman\n";
 			std::cout << "3. Master\n";
@@ -78,11 +77,11 @@ class Game {
 				switch(gender[0]) {
 					case('M'):
 					case('m'):
-						players.push_back(Player(playerName, Male, cityNames[i], randomInt(35)));
+						players.push_back(Player(playerName, Male, cityNames[i]));
 						break;
 					case('F'):
 					case('f'):
-						players.push_back(Player(playerName, Female, cityNames[i], randomInt(35)));
+						players.push_back(Player(playerName, Female, cityNames[i]));
 						break;
 				}
 			}
@@ -106,7 +105,8 @@ class Game {
 			std::cout << "grain, some of your people will starve, and you will have\n";
 			std::cout << "a high death rate. High taxes raise money, but slow down\n";
 			std::cout << "economic growth. (Press ENTER to begin game)\n";
-			std::cin.ignore();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 			return;
 		}
 		
@@ -114,20 +114,35 @@ class Game {
 			while(!isOver) {
 				for(int i = 0; i < players.size(); i++) {
 					if(players[i].isDead() == false) {
-						//turn(players[i]);
+						turn(players[i]);
+						if(players[i].hasWon()) {
+							isOver = true;
+						}
 					}
-				}			
+				}
+				if(allDead()) {
+					isOver = true;
+				}
 			}
 			return;
 		}
 		
-		void turn(Player player) {
-			player.takeTurn(randomInt(5), randomInt(6), randomInt(50));
+		bool allDead() {
+			for(int i = 0; i < players.size(); i++) {
+				if(players[i].isDead() == false) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		void turn(Player& player) {
+			player.takeTurn();
 			//player.checkInvasion();
 			//player.adjustTax();
 			//player.statePurchases();
 			player.checkTitle(difficultyLevel);
-			//player.advanceYear();
+			player.advanceYear();
 			
 			return;
 			/*
@@ -160,18 +175,12 @@ class Game {
 			*/
 		}
 		
-		int randomInt(int i) {
-			std::random_device device;
-			std::mt19937 generator(device());
-			std::uniform_int_distribution<int> distribution(0, i);
-		}
-		
 	private:
 		const std::vector<std::string> cityNames = {"Santa Paravia", "Fiumaccio", "Torricella", "Molinetto", "Fontanile", "Romanga", "Peppone"};
 		int difficultyLevel;
-		Player Baron = Player("Baron", Male, cityNames[6], randomInt(35));
+		Player Baron = Player("Baron", Male, cityNames[6]);
 		std::vector<Player> players;
-		bool isOver;
+		bool isOver = false;
 		
 };
 
