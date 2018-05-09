@@ -387,6 +387,65 @@ int City::releaseGrain() {
 	return(0);
 }
 
+void City::adjustTax() {
+    std::string menuInput;
+	int valueInput; 
+    while(menuInput[0] != 'q')
+    {
+        //printf("\n%s %s\n\n", title, name);
+		//GenerateIncome();
+		std::cout << "(" << customsDuty << "%)\t\t(" << salesTax << "%)\t\t(" << incomeTax << "%)";
+		std::cout << "\n1. Customs Duty, 2. Sales Tax, 3. Wealth Tax, 4. Justice\n";
+        std::cout << "Enter tax number for changes, q to continue: ";
+        std::cin >> menuInput;
+        switch(menuInput[0])
+        {
+            case 1: 
+				std::cout << "New customs duty (0 to 100): ";
+				std::cin >> valueInput;
+                if(valueInput > 100) {
+					valueInput = 100;
+				}
+                if(valueInput < 0) {
+					valueInput = 0;
+				}
+                customsDuty = valueInput;
+                break;
+            case 2: 
+				std::cout << "New sales tax (0 to 50): ";
+                std::cin >> valueInput;
+                if(valueInput > 50) valueInput = 50;
+                if(valueInput < 0) valueInput = 0;
+                salesTax = valueInput;
+                break;
+            case 3: 	
+				std::cout << "New wealth tax (0 to 25): ";
+                std::cin >> valueInput;
+                if(valueInput > 25) valueInput = 25;
+                if(valueInput < 0) valueInput = 0;
+                incomeTax = valueInput;
+                break;
+            case 4:
+				std::cout << "Justice: 1. Very fair, 2. Moderate, 3. Harsh, 4. Outrageous: ";
+                std::cin >> valueInput;
+                if(valueInput > 4) {
+					valueInput = 4;
+				}
+                if(valueInput < 1) {
+					valueInput = 1;
+				}
+                justice = valueInput;
+                break;
+			default:
+				break;
+        }
+    
+    }
+    //AddRevenue(Me);
+    //if(Me->IsBankrupt == True)
+    //SeizeAssets(Me);
+}   
+
 //--------------------------------------------------------------------------------------------------
 //Random Number Generation
 

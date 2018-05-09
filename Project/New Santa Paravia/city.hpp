@@ -55,6 +55,7 @@ class City {
 		void buyLand();
 		void sellLand();
 		int releaseGrain();
+		void adjustTax();
 		int randomInt(int i);
 		double randomDouble(double d);
 		
