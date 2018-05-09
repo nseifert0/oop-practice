@@ -37,7 +37,8 @@ class Player {
 		void buyAndSell();
 		void printYearlyUpdate();
 		void printGrainAndLand();
-		void printHarvestStatus();		
+		void printHarvestStatus();
+		int titleAsInt();
 		bool isDead();
 		bool isBankrupt();
 		bool hasWon();

@@ -373,7 +373,7 @@ int City::releaseGrain() {
 	treasury -= soldiersPay;
 	std::cout << "You paid your soldiers " << soldiersPay <<" florins.\n";
 	std::cout << "You have " << serfs << " serfs in your city.\n";
-	std::cout << "(Press ENTER to advance to next year): ";
+	std::cout << "(Press ENTER to advance to taxes and justice): ";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 	if((land / 1000) > soldiers) {
@@ -387,55 +387,54 @@ int City::releaseGrain() {
 	return(0);
 }
 
-void City::adjustTax() {
+void City::adjustTax(int titleAsInt) {
     std::string menuInput;
 	int valueInput; 
     while(menuInput[0] != 'q')
     {
         //printf("\n%s %s\n\n", title, name);
-		//GenerateIncome();
+		generateIncome(titleAsInt);
 		std::cout << "(" << customsDuty << "%)\t\t(" << salesTax << "%)\t\t(" << incomeTax << "%)";
 		std::cout << "\n1. Customs Duty, 2. Sales Tax, 3. Wealth Tax, 4. Justice\n";
         std::cout << "Enter tax number for changes, q to continue: ";
         std::cin >> menuInput;
-        switch(menuInput[0])
-        {
-            case 1: 
+        switch(menuInput[0]) {
+			case '1': 
 				std::cout << "New customs duty (0 to 100): ";
 				std::cin >> valueInput;
-                if(valueInput > 100) {
+				if(valueInput > 100) {
 					valueInput = 100;
 				}
-                if(valueInput < 0) {
+				if(valueInput < 0) {
 					valueInput = 0;
 				}
-                customsDuty = valueInput;
-                break;
-            case 2: 
+				customsDuty = valueInput;
+				break;
+			case '2': 
 				std::cout << "New sales tax (0 to 50): ";
-                std::cin >> valueInput;
-                if(valueInput > 50) valueInput = 50;
-                if(valueInput < 0) valueInput = 0;
-                salesTax = valueInput;
-                break;
-            case 3: 	
+				std::cin >> valueInput;
+				if(valueInput > 50) valueInput = 50;
+				if(valueInput < 0) valueInput = 0;
+				salesTax = valueInput;
+				break;
+			case '3': 	
 				std::cout << "New wealth tax (0 to 25): ";
-                std::cin >> valueInput;
-                if(valueInput > 25) valueInput = 25;
-                if(valueInput < 0) valueInput = 0;
-                incomeTax = valueInput;
-                break;
-            case 4:
+				std::cin >> valueInput;
+				if(valueInput > 25) valueInput = 25;
+				if(valueInput < 0) valueInput = 0;
+				incomeTax = valueInput;
+				break;
+			case '4':
 				std::cout << "Justice: 1. Very fair, 2. Moderate, 3. Harsh, 4. Outrageous: ";
-                std::cin >> valueInput;
-                if(valueInput > 4) {
+				std::cin >> valueInput;
+				if(valueInput > 4) {
 					valueInput = 4;
 				}
-                if(valueInput < 1) {
+				if(valueInput < 1) {
 					valueInput = 1;
 				}
-                justice = valueInput;
-                break;
+				justice = valueInput;
+				break;
 			default:
 				break;
         }
@@ -445,6 +444,50 @@ void City::adjustTax() {
     //if(Me->IsBankrupt == True)
     //SeizeAssets(Me);
 }   
+
+void City::generateIncome(int titleAsInt) {
+	float y;
+	int revenues = 0;
+	std::string justiceString;
+	justiceRevenue = (justice * 300 - 500) * titleAsInt;
+	switch(justice)
+	{
+		case 1: 
+			justiceString = "Very Fair";
+			break;
+		case 2: 
+			justiceString = "Moderate";
+			break;
+		case 3: 
+			justiceString = "Harsh";
+			break;
+		case 4:
+			justiceString = "Outrageous";
+			break;
+		default:
+			break;
+	}
+	y = 150.0 - (float)salesTax - (float)customsDuty - (float)incomeTax;
+	if(y < 1.0) {
+		y = 1.0;
+	}
+	y /= 100.0;
+	customsDutyRevenue = nobles * 180 + clergy * 75 + merchants * 20 * y;
+	customsDutyRevenue += (int)(publicWorks * 100.0);
+	customsDutyRevenue = (int)((float)customsDuty / 100.0 * (float)customsDutyRevenue);
+	salesTaxRevenue = nobles * 50 + merchants * 25 + (int)(publicWorks * 10.0);
+	salesTaxRevenue *= (y * (5 - justice) * salesTax);
+	salesTaxRevenue /= 200;
+	incomeTaxRevenue = nobles * 250 + (int)(publicWorks * 20.0);
+	incomeTaxRevenue += (10 * justice * nobles * y);
+	incomeTaxRevenue *= incomeTax;
+	incomeTaxRevenue /= 100;
+	revenues = customsDutyRevenue + salesTaxRevenue + incomeTaxRevenue + justiceRevenue;
+	std::cout << "\nState revenues " << revenues << " gold florins.\n";
+	std::cout << "Customs Duty\tSales Tax\tIncome Tax\tJustice\n";
+	std::cout << customsDutyRevenue << "\t\t" << salesTaxRevenue << "\t\t" << incomeTaxRevenue << "\t\t" << justiceRevenue << " (" << justiceString << ")\n";
+	return;
+}
 
 //--------------------------------------------------------------------------------------------------
 //Random Number Generation

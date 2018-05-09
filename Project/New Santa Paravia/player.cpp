@@ -15,6 +15,8 @@ void Player::takeTurn() {
 	city.setNewLandAndGrainPrices();
 	buyAndSell();
 	city.releaseGrain();
+	//Something with invasion probably goes here;
+	city.adjustTax(titleAsInt());
 	return;
 }
 
@@ -163,6 +165,14 @@ void Player::printHarvestStatus() {
 			break;
 	}
 	return;
+}
+
+int Player::titleAsInt() {
+	for(int i = 0; i < maleTitles.size(); i++) {
+		if(title == maleTitles[i] || title == femaleTitles[i]) {
+			return i + 1;
+		}
+	}
 }
 
 bool Player::isDead() {
